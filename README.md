@@ -8,7 +8,7 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 
-Click on the below link to view my website 
+Click on the  link to view my website 
 https://ai-resume-builder-website.netlify.app
 
 
