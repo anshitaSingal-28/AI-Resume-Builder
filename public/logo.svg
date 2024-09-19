@@ -1,0 +1,37 @@
+<svg
+  width="400"
+  height="100"
+  viewBox="0 0 100 24"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  stroke="currentColor"
+  class="text-[#000000]"
+>
+  <!-- Document Icon -->
+  <path
+    d="M14 2H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-4-4z"
+    fill="rgb(159, 91, 255)"
+    stroke="none"
+  />
+  <path
+    d="M16 2v6h6"
+    stroke="#ffffff"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <line x1="8" y1="12" x2="16" y2="12" stroke="#ffffff" stroke-width="2" />
+  <line x1="8" y1="16" x2="16" y2="16" stroke="#ffffff" stroke-width="2" />
+
+  <!-- Text -->
+  <text
+    x="24"
+    y="18"
+    font-family="Arial, sans-serif"
+    font-size="13"
+    font-weight="bold"
+    fill="#000000"
+  >
+    AI - Resume
+  </text>
+</svg>
