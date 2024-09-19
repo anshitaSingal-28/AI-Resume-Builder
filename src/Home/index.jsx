@@ -12,6 +12,7 @@ import {
   ViewIcon,
 } from "lucide-react";
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Home() {
   return (
@@ -29,17 +30,15 @@ function Home() {
             with the help of AI.
           </p>
           <div className="flex gap-4">
-            <a href="/auth/sign-in">
-              <Button>
-                Get Started For Free<ArrowRight className="ml-2"></ArrowRight>
-              </Button>
-            </a>
-            <a href="/dashboard">
+            <Link to={"/auth/sign-in"}>
+              <Button>Get Started For Free</Button>
+            </Link>
+            <Link to={"/dashboard"}>
               <Button>
                 Dashboard
                 <HomeIcon className="ml-2" />
               </Button>
-            </a>
+            </Link>
           </div>
         </header>
 
