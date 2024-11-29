@@ -49,24 +49,34 @@ function Summary({ enableNext }) {
         return;
       }
 
-      // Validate and handle the parsed summaries
-      if (parsedSummaries && parsedSummaries.experience_levels) {
-        const experienceLevels = Object.entries(
-          parsedSummaries.experience_levels
-        ).map(([level, data]) => ({
-          level,
-          summary: data.summary,
-        }));
+      // Handle AI response with 'Resume Summary' key
+      if (parsedSummaries?.["Resume Summary"]) {
+        const experienceLevels = parsedSummaries["Resume Summary"].map(
+          (item) => ({
+            level: item["Experience Level"],
+            summary: item["Summary"],
+          })
+        );
 
         if (experienceLevels.length === 3) {
           setAiGeneratedSummaryList(experienceLevels);
         } else {
-          throw new Error("Unexpected response format or missing data.");
+          console.warn(
+            "Unexpected number of summaries:",
+            experienceLevels.length
+          );
+          toast.error("Unexpected response format or missing data.");
         }
       } else {
-        throw new Error(
-          "AI response does not contain 'experience_levels' object."
-        );
+        console.warn("AI response does not contain 'Resume Summary' key.");
+        toast.error("AI response format is invalid. Please retry.");
+
+        // Fallback data
+        setAiGeneratedSummaryList([
+          { level: "Fresher", summary: "Default Fresher summary." },
+          { level: "Mid-Level", summary: "Default Mid-Level summary." },
+          { level: "Experienced", summary: "Default Experienced summary." },
+        ]);
       }
     } catch (error) {
       console.error("Error generating summary from AI:", error);
