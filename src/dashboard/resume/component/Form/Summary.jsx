@@ -32,51 +32,36 @@ function Summary({ enableNext }) {
     console.log("Prompt sent to AI:", PROMPT);
 
     try {
-      // Send message to AI
       const result = await AIchatSession.sendMessage(PROMPT);
       const responseText = await result.response.text();
       console.log("Response from AI:", responseText);
 
-      // Attempt to parse the AI response
+      // Parse the AI response
       let parsedSummaries;
       try {
         parsedSummaries = JSON.parse(responseText);
         console.log("Parsed Summaries:", parsedSummaries);
       } catch (parseError) {
-        console.error("Failed to parse AI response as JSON:", parseError);
+        console.error("Failed to parse AI response:", parseError);
         toast.error("Error parsing AI response. Please check the AI service.");
         setLoading(false);
         return;
       }
 
-      // Handle AI response with 'Resume Summary' key
-      if (parsedSummaries?.["Resume Summary"]) {
-        const experienceLevels = parsedSummaries["Resume Summary"].map(
+      // Handle AI response key 'Experience Levels'
+      if (parsedSummaries && parsedSummaries["Experience Levels"]) {
+        const experienceLevels = parsedSummaries["Experience Levels"].map(
           (item) => ({
             level: item["Experience Level"],
             summary: item["Summary"],
           })
         );
 
-        if (experienceLevels.length === 3) {
-          setAiGeneratedSummaryList(experienceLevels);
-        } else {
-          console.warn(
-            "Unexpected number of summaries:",
-            experienceLevels.length
-          );
-          toast.error("Unexpected response format or missing data.");
-        }
+        setAiGeneratedSummaryList(experienceLevels);
       } else {
-        console.warn("AI response does not contain 'Resume Summary' key.");
-        toast.error("AI response format is invalid. Please retry.");
-
-        // Fallback data
-        setAiGeneratedSummaryList([
-          { level: "Fresher", summary: "Default Fresher summary." },
-          { level: "Mid-Level", summary: "Default Mid-Level summary." },
-          { level: "Experienced", summary: "Default Experienced summary." },
-        ]);
+        throw new Error(
+          "AI response does not contain the expected 'Experience Levels' key."
+        );
       }
     } catch (error) {
       console.error("Error generating summary from AI:", error);
