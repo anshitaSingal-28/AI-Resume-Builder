@@ -49,8 +49,8 @@ function Summary({ enableNext }) {
       }
 
       // Handle AI response key 'Experience Levels'
-      if (parsedSummaries && parsedSummaries["Experience Levels"]) {
-        const experienceLevels = parsedSummaries["Experience Levels"].map(
+      if (parsedSummaries && parsedSummaries["Resume Summary"]) {
+        const experienceLevels = parsedSummaries["Resume Summary"].map(
           (item) => ({
             level: item["Experience Level"],
             summary: item["Summary"],
@@ -60,7 +60,7 @@ function Summary({ enableNext }) {
         setAiGeneratedSummaryList(experienceLevels);
       } else {
         throw new Error(
-          "AI response does not contain the expected 'Experience Levels' key."
+          "AI rsesponse does not contain the expected 'Experience Levels' key."
         );
       }
     } catch (error) {
